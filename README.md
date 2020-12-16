@@ -10,7 +10,7 @@ Time dashboard for important times. Colour theme based on time of day.
 - Geo IP API
 - World Time API
 
-### Favourite function I wrote for this
+### A function I enjoyed writing
 
 Find out if a year is a gap year.
 
