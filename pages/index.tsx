@@ -55,7 +55,7 @@ const Home = () => {
 
   return (
     <Layout title='Dashboard' isDay={isDay}>
-      {time && location && (
+      {time && location ? (
         <MainContainer
           location={{
             timeZone: location.time_zone,
@@ -73,7 +73,7 @@ const Home = () => {
             weekNumber: time.week_number,
           }}
         />
-      )}
+      ) : null}
     </Layout>
   );
 };
