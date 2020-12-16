@@ -9,6 +9,16 @@ const Home = () => {
   const [time, setTime] = useState<any>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<any>(null);
+  const [isDay, setIsDay] = useState<boolean>(false);
+
+  const dayOrNight = (time: string) => {
+    const currentHours = new Date(time).getHours();
+    if (currentHours < 6 && currentHours > 18) {
+      setIsDay(false);
+    } else {
+      setIsDay(true);
+    }
+  };
 
   useEffect(() => {
     const getInformation = async () => {
@@ -17,6 +27,7 @@ const Home = () => {
         setLocation(location);
         const time = await fetch(ipTime).then(data => data.json());
         setTime(time);
+        dayOrNight(time.datetime);
       } catch (error) {
         setError(error);
       } finally {
@@ -29,19 +40,19 @@ const Home = () => {
 
   if (error)
     return (
-      <div>
-        <h1>Error</h1>
+      <div className='container mx-auto px-10 py-10'>
+        <h1 className='text-5xl font-black'>Error</h1>
       </div>
     );
   if (loading)
     return (
-      <div>
-        <h1>Loading</h1>
+      <div className='container mx-auto px-10 py-10'>
+        <h1 className='text-5xl font-black'>Loading...</h1>
       </div>
     );
 
   return (
-    <Layout title='Dashboard'>
+    <Layout title='Dashboard' isDay={isDay}>
       <MainContainer
         location={{
           timeZone: location.time_zone,
