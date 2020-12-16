@@ -38,40 +38,44 @@ const Home = () => {
     getInformation();
   }, []);
 
-  if (error)
+  if (error) {
     return (
       <div className='container mx-auto px-10 py-10'>
         <h1 className='text-5xl font-black'>Error</h1>
       </div>
     );
-  if (loading)
+  }
+  if (loading) {
     return (
       <div className='container mx-auto px-10 py-10'>
         <h1 className='text-5xl font-black'>Loading...</h1>
       </div>
     );
+  }
 
-  return (
-    <Layout title='Dashboard' isDay={isDay}>
-      <MainContainer
-        location={{
-          timeZone: location.time_zone,
-          countryName: location.country_name,
-          city: location.city,
-          regionName: location.region_name,
-          latitude: location.latitude,
-          longitude: location.longitude,
-        }}
-        time={{
-          abbreviation: time.abbreviation,
-          datetime: time.datetime,
-          dayOfWeek: time.day_of_week,
-          dayOfYear: time.day_of_year,
-          weekNumber: time.week_number,
-        }}
-      />
-    </Layout>
-  );
+  if (time) {
+    return (
+      <Layout title='Dashboard' isDay={isDay}>
+        <MainContainer
+          location={{
+            timeZone: location.time_zone,
+            countryName: location.country_name,
+            city: location.city,
+            regionName: location.region_name,
+            latitude: location.latitude,
+            longitude: location.longitude,
+          }}
+          time={{
+            abbreviation: time.abbreviation,
+            datetime: time.datetime,
+            dayOfWeek: time.day_of_week,
+            dayOfYear: time.day_of_year,
+            weekNumber: time.week_number,
+          }}
+        />
+      </Layout>
+    );
+  }
 };
 
 export default Home;
